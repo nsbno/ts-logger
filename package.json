@@ -1,0 +1,20 @@
+{
+  "name": "@vygruppen/ts-logger",
+  "description": "A logging framework for Vy's frontend libraries",
+  "version": "0.0.1",
+  "type": "module",
+  "module": "dist/vy-ts-logger.js",
+  "main": "dist/vy-ts-logger.umd.cjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsbno/ts-logger.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  }
+}

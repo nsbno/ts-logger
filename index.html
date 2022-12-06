@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testing Vy Frontend Logger</title>
+  </head>
+  <body>
+    <main>
+      <form>
+        <h1>Local testing of the frontend logger framework</h1>
+        <div class="grid">
+          <div>
+            <label for="log-message">Log message:</label>
+            <input name="log-message" />
+          </div>
+          <div>
+            <label for="environment">Environment</label>
+            <select name="environment">
+              <option value="">Console only</option>
+              <option value="test1">Test1</option>
+              <option value="test2">Test2</option>
+              <option value="test3">Test3</option>
+              <option value="test4">Test4</option>
+              <option value="test5">Test5</option>
+              <option value="prod" disabled>Production</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid">
+          <button type="submit" name="action" value="debug">Log debug</button>
+          <button type="submit" name="action" value="info">Log info</button>
+          <button type="submit" name="action" value="warn">Log warn</button>
+          <button type="submit" name="action" value="error">Log error</button>
+        </div>
+        <p>
+          Open your console to see the error messages. Note that you'll have to
+          set your log levels to "verbose" to see debug logging.
+        </p>
+      </form>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module">
+      import { getLogger } from "./src/main.ts";
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const level = e.submitter?.value;
+        const environment = formData.get("environment");
+        const message = formData.get("log-message") ?? "[empty string]";
+
+        const logger = getLogger({
+          source: "local-testing",
+          environment,
+        });
+
+        logger[level]({ level, message });
+      });
+    </script>
+    <style>
+      /** A few styles, for demo purposes only */
+      body {
+        font-family: "Vy Sans", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      label {
+        display: block;
+      }
+      p {
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        max-width: 40ch;
+      }
+      input,
+      select {
+        padding: 0.5rem 1rem;
+        border: 1px solid #0e0e0e;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #0e0e0e;
+        border-radius: 6px;
+        background-color: #0e0e0e;
+        color: #fff;
+      }
+      .grid {
+        display: flex;
+        gap: 1rem;
+      }
+    </style>
+  </body>
+</html>
