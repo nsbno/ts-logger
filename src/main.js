@@ -56,8 +56,8 @@ class LogClient {
             return;
         }
         const loggerUrl = isProduction() || this.environment === "prod"
-            ? "https://frontend-logger.cloud.nsb.no/log"
-            : "https://test.frontend-logger.cloud.nsb.no/log";
+            ? "https://frontend-logger.cloud.vy.no/log"
+            : "https://test.frontend-logger.cloud.vy.no/log";
         return fetch(loggerUrl, {
             method: "POST",
             body: JSON.stringify({
