@@ -15,10 +15,8 @@
     "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.2",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
-  },
-  "dependencies": {
-    "@changesets/cli": "^2.25.2"
   }
 }
