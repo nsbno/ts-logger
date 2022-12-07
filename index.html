@@ -9,23 +9,9 @@
     <main>
       <form>
         <h1>Local testing of the frontend logger framework</h1>
-        <div class="grid">
-          <div>
-            <label for="log-message">Log message:</label>
-            <input name="log-message" />
-          </div>
-          <div>
-            <label for="environment">Environment</label>
-            <select name="environment">
-              <option value="">Console only</option>
-              <option value="test1">Test1</option>
-              <option value="test2">Test2</option>
-              <option value="test3">Test3</option>
-              <option value="test4">Test4</option>
-              <option value="test5">Test5</option>
-              <option value="prod" disabled>Production</option>
-            </select>
-          </div>
+        <div>
+          <label for="log-message">Log message:</label>
+          <input name="log-message" />
         </div>
         <div class="grid">
           <button type="submit" name="action" value="debug">Log debug</button>
@@ -47,12 +33,10 @@
         e.preventDefault();
         const formData = new FormData(form);
         const level = e.submitter?.value;
-        const environment = formData.get("environment");
         const message = formData.get("log-message") ?? "[empty string]";
 
         const logger = getLogger({
           source: "local-testing",
-          environment,
         });
 
         logger[level]({ level, message });

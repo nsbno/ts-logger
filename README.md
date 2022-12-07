@@ -35,9 +35,25 @@ import { getLogger } from "@vygruppen/ts-logger";
 const logger = getLogger({ source: "my-app", environment: "wonky" });
 ```
 
-### Neat things to know
+### Override the URL
+
+By default, the logger will log to the relative URL `/services/frontend-logger`, but you can override this by passing a `url` option to the `getLogger` function.
+
+```ts
+import { getLogger } from "@vygruppen/ts-logger";
+const logger = getLogger({
+  source: "my-app",
+  url: "https://my-log-service.com",
+});
+```
+
+Note that the URL will still be called as a POST with the same JSON body. If you need something different, you probably should fork this library and create your own. It's not a lot of code.
+
+### Async function
 
 Since this triggers a network request, the logging functions are async. There shouldn't be any reasons to wait for the request to finish, but you can if you have a particular reason to do so.
+
+### Singleton
 
 The logger is a singleton, so you can create it as many times as you like without any performance penalty.
 
