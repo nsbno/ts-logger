@@ -18,16 +18,29 @@ type CreateLogClientArgs = {
   source: string;
   /** Override the environment label */
   environment?: string;
+  /** The URL you want to log to
+   *
+   * Defaults to what Vy uses internally.
+   * If you're not using this for a Vy related service,
+   * you probably want to set this.
+   */
+  url?: string;
 };
 
 class LogClient {
   private static instance: LogClient;
   private source: string;
   private environment?: string;
+  private url: string;
 
-  private constructor({ source, environment }: CreateLogClientArgs) {
+  private constructor({
+    source,
+    environment,
+    url = "/services/frontend-logger",
+  }: CreateLogClientArgs) {
     this.source = source;
     this.environment = environment ?? this.getLogEnvironment();
+    this.url = url;
   }
 
   /** Gets an instance of the logger for you to use. */
@@ -80,12 +93,8 @@ class LogClient {
       console[logLevel]("[ts-logger]: ", { message, data });
       return;
     }
-    const loggerUrl =
-      isProduction() || this.environment === "prod"
-        ? "https://frontend-logger.cloud.nsb.no/log"
-        : "https://test.frontend-logger.cloud.nsb.no/log";
 
-    return fetch(loggerUrl, {
+    return fetch(this.url, {
       method: "POST",
       body: JSON.stringify({
         message,
