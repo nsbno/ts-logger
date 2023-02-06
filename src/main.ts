@@ -36,7 +36,7 @@ class LogClient {
   private constructor({
     source,
     environment,
-    url = "/services/frontend-logger",
+    url = "/web-services/web-logger",
   }: CreateLogClientArgs) {
     this.source = source;
     this.environment = environment ?? this.getLogEnvironment();
