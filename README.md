@@ -37,7 +37,7 @@ const logger = getLogger({ source: "my-app", environment: "wonky" });
 
 ### Override the URL
 
-By default, the logger will log to the relative URL `/services/frontend-logger`, but you can override this by passing a `url` option to the `getLogger` function.
+By default, the logger will log to the relative URL `/web-services/web-logger`, but you can override this by passing a `url` option to the `getLogger` function.
 
 ```ts
 import { getLogger } from "@vygruppen/ts-logger";
