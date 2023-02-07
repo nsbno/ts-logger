@@ -1,5 +1,11 @@
 # @vygruppen/ts-logger
 
+## 0.0.5
+
+### Patch Changes
+
+- 6f2db9f: Change the default relative URL for logging from `/services/frontend-logger` to `/web-services/web-logger`
+
 ## 0.0.4
 
 ### Patch Changes

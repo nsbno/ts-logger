@@ -1,7 +1,7 @@
 {
   "name": "@vygruppen/ts-logger",
   "description": "A logging framework for Vy's frontend libraries",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "module": "dist/ts-logger.js",
   "main": "dist/ts-logger.umd.cjs",
