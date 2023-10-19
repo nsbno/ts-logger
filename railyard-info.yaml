@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ts-logger
+  title: ts-logger
+  description: This library makes is simple to log messages, errors and other data to Vy's frontend logging service.
+spec:
+  type: library
+  lifecycle: production
+  owner: NO-OWNER
