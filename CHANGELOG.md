@@ -1,5 +1,11 @@
 # @vygruppen/ts-logger
 
+## 0.0.6
+
+### Patch Changes
+
+- bec9ba1: Added handling of stage environment, so that logs from test4 and stage are sent to the stage environment in web-logger
+
 ## 0.0.5
 
 ### Patch Changes
