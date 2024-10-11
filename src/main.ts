@@ -1,4 +1,4 @@
-import { isLocalhost, isProduction } from "./environment-utils";
+import { isLocalhost, isProduction, isStage } from "./environment-utils";
 
 type LogArgs = {
   /** The log message you want logged */
@@ -109,6 +109,9 @@ class LogClient {
   private getLogEnvironment() {
     if (isProduction()) {
       return "prod";
+    }
+    if (isStage()) {
+      return "stage";
     }
     if (isLocalhost()) {
       return undefined;

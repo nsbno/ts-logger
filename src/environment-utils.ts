@@ -10,7 +10,13 @@ export function isTest() {
   return !!host && host.indexOf("test") >= 0;
 }
 
+/** Checks whether or not we're in a stage environment */
+export function isStage() {
+  var host = window.location.hostname;
+  return !!host && (host.indexOf("test4") >= 0 || host.indexOf("stage") >= 0);
+}
+
 /** Checks whether or not we're in a production environment */
 export function isProduction() {
-  return !isLocalhost() && !isTest();
+  return !isLocalhost() && !isTest() && !isStage();
 }
