@@ -1,4 +1,4 @@
-import { isLocalhost, isProduction, isStage } from "./environment-utils";
+import { isLocalhost } from "./environment-utils";
 
 type LogArgs = {
   /** The log message you want logged */
@@ -16,8 +16,6 @@ type InternalLogArgs = LogArgs & {
 type CreateLogClientArgs = {
   /** The source you want to have logged. You can think of it as the app name */
   source: string;
-  /** Override the environment label */
-  environment?: string;
   /** The URL you want to log to
    *
    * Defaults to what Vy uses internally.
@@ -30,16 +28,13 @@ type CreateLogClientArgs = {
 class LogClient {
   private static instance: LogClient;
   private source: string;
-  private environment?: string;
   private url: string;
 
   private constructor({
     source,
-    environment,
     url = "/web-services/web-logger",
   }: CreateLogClientArgs) {
     this.source = source;
-    this.environment = environment ?? this.getLogEnvironment();
     this.url = url;
   }
 
@@ -89,7 +84,7 @@ class LogClient {
 
   /** Internal logging utility for shared logic */
   private log({ message, data, logLevel }: InternalLogArgs) {
-    if (isLocalhost() && !this.environment) {
+    if (isLocalhost()) {
       console[logLevel]("[ts-logger]: ", { message, data });
       return;
     }
@@ -101,22 +96,8 @@ class LogClient {
         data,
         level: logLevel,
         source: this.source,
-        environment: this.environment,
       }),
     });
-  }
-  /** Determines the log environment based on the current location */
-  private getLogEnvironment() {
-    if (isProduction()) {
-      return "prod";
-    }
-    if (isStage()) {
-      return "stage";
-    }
-    if (isLocalhost()) {
-      return undefined;
-    }
-    return window.location.hostname.split(".")[0];
   }
 }
 
